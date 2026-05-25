@@ -52,10 +52,14 @@ if(NOT KAUTH_BUILD_CODEGENERATOR_ONLY)
         DEPRECATION_VERSIONS
         EXCLUDE_DEPRECATED_BEFORE_AND_AT ${EXCLUDE_DEPRECATED_BEFORE_AND_AT}
     )
-    target_link_libraries(KF6AuthCore PUBLIC Qt6::Core Qt6::Gui KF6::CoreAddons)  # for KJob
+    target_link_libraries(KF6AuthCore PUBLIC Qt6::Core Qt6::Gui KF6CoreAddons)  # for KJob
 
-    target_include_directories(KF6AuthCore INTERFACE
-        "$<INSTALL_INTERFACE:${KAUTHCORE_INSTALL_INCLUDEDIR};${KAUTH_INSTALL_INCLUDEDIR}>"
+    target_include_directories(KF6AuthCore 
+	                          INTERFACE
+				     "$<INSTALL_INTERFACE:${KAUTHCORE_INSTALL_INCLUDEDIR};${KAUTH_INSTALL_INCLUDEDIR}>"
+	                          PUBLIC
+				     ${KDE_INSTALL_INCLUDEDIR_KF}/KCoreAddons
+				     ${KDE_INSTALL_INCLUDEDIR_KF}/KWindowSystem
     )
     install(TARGETS KF6AuthCore EXPORT KF6AuthTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
 

@@ -41,10 +41,11 @@ set(EXCLUDE_DEPRECATED_BEFORE_AND_AT 0 CACHE STRING "Control the range of deprec
 set(kauth_version_header "${CMAKE_CURRENT_BINARY_DIR}/src/kauth_version.h")
 ecm_setup_version(PROJECT VARIABLE_PREFIX KAUTH
                         VERSION_HEADER "${kauth_version_header}"
-                        PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KF6AuthConfigVersion.cmake"
+			PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/SonicFrameworksAuthConfigVersion.cmake"
                         SOVERSION 6)
 
-find_package(KF6CoreAddons ${KF_DEP_VERSION} REQUIRED)
+#find_package(KF6CoreAddons ${KF_DEP_VERSION} REQUIRED)
+find_package(SonicFrameworksCoreAddons ${KF_DEP_VERSION} REQUIRED)
 
 set(KAUTH_HELPER_INSTALL_DIR "${KDE_INSTALL_LIBEXECDIR_KF}/kauth")
 
@@ -71,32 +72,32 @@ if(NOT KAUTH_BUILD_CODEGENERATOR_ONLY)
 endif()
 
 # create a Config.cmake and a ConfigVersion.cmake file and install them
-set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KF6Auth")
+set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/SonicFrameworksAuth")
 
 include(CMakePackageConfigHelpers)
 
 configure_package_config_file(
-    "${CMAKE_CURRENT_SOURCE_DIR}/KF6AuthConfig.cmake.in"
-    "${CMAKE_CURRENT_BINARY_DIR}/KF6AuthConfig.cmake"
+	"${CMAKE_CURRENT_SOURCE_DIR}/SonicFrameworksAuthConfig.cmake.in"
+	"${CMAKE_CURRENT_BINARY_DIR}/SonicFrameworksAuthConfig.cmake"
     PATH_VARS KDE_INSTALL_DATADIR_KF
     INSTALL_DESTINATION  ${CMAKECONFIG_INSTALL_DIR}
 )
 
-install(FILES  "${CMAKE_CURRENT_BINARY_DIR}/KF6AuthConfig.cmake"
-               "${CMAKE_CURRENT_BINARY_DIR}/KF6AuthConfigVersion.cmake"
-               "${CMAKE_CURRENT_SOURCE_DIR}/cmake/KF6AuthMacros.cmake"
+install(FILES  "${CMAKE_CURRENT_BINARY_DIR}/SonicFrameworksAuthConfig.cmake"
+	"${CMAKE_CURRENT_BINARY_DIR}/SonicFrameworksAuthConfigVersion.cmake"
+	"${CMAKE_CURRENT_SOURCE_DIR}/cmake/SonicFrameworksAuthMacros.cmake"
         DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
         COMPONENT Devel )
 
 
 if(NOT KAUTH_BUILD_CODEGENERATOR_ONLY)
     install(EXPORT KF6AuthTargets DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
-        FILE KF6AuthTargets.cmake NAMESPACE KF6:: COMPONENT Devel)
+	    FILE SonicFrameworksAuthTargets.cmake NAMESPACE KF6:: COMPONENT Devel)
 endif()
 
 if(NOT "${KAUTH_BACKEND_NAME}" STREQUAL "FAKE")
     install(EXPORT KF6AuthToolsTargets DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
-            FILE KF6AuthToolsTargets.cmake NAMESPACE KF6:: COMPONENT Devel)
+	    FILE SonicFrameworksAuthToolsTargets.cmake NAMESPACE KF6:: COMPONENT Devel)
 endif()
 
 install(FILES ${kauth_version_header}

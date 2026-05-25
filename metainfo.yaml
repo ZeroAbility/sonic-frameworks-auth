@@ -9,9 +9,9 @@ portingAid: false
 deprecated: false
 release: true
 libraries:
-    - cmake: "KF6::AuthCore"
-    - cmake: "KF6::Auth"
-cmakename: KF6Auth
+    - cmake: "SonicFrameworksAuthCore"
+    - cmake: "SonicFramworksAuth"
+cmakename: SonicFrameworksAuth
 
 public_lib: true
 group: Frameworks

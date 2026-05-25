@@ -29,7 +29,8 @@ if(NOT KAUTH_BACKEND)
               PURPOSE "Support for executing privileged actions in a controlled way (KAuth)"
             )
 
-            find_package(KF6WindowSystem ${KF_DEP_VERSION} REQUIRED)
+	    #find_package(KF6WindowSystem ${KF_DEP_VERSION} REQUIRED)
+	    find_package(SonicFrameworksWindowSystem ${KF_DEP_VERSION} REQUIRED)
         else()
             set(KAUTH_BACKEND "FAKE")
         endif()
@@ -66,7 +67,8 @@ elseif(KAUTH_BACKEND AND NOT KAUTH_BUILD_CODEGENERATOR_ONLY)
                       Falling back to Fake backend")
             set(KAUTH_BACKEND "FAKE")
         else()
-            find_package(KF6WindowSystem ${KF_DEP_VERSION} REQUIRED)
+		#find_package(KF6WindowSystem ${KF_DEP_VERSION} REQUIRED)
+		find_package(SonicWindowSystem ${KF_DEP_VERSION} REQUIRED)
             find_package(Qt6DBus ${REQUIRED_QT_VERSION} CONFIG REQUIRED)
         endif()
     endif()
@@ -97,7 +99,7 @@ elseif(KAUTH_BACKEND_NAME STREQUAL "POLKITQT6-1")
         backends/polkit-1/Polkit1Backend.cpp
     )
 
-    set(KAUTH_BACKEND_LIBS ${POLKITQT-1_CORE_LIBRARY} Qt6::DBus Qt6::Gui KF6::AuthCore KF6::WindowSystem)
+    set(KAUTH_BACKEND_LIBS ${POLKITQT-1_CORE_LIBRARY} Qt6::DBus Qt6::Gui KF6::AuthCore KF6WindowSystem)
 
     # POLKITQT-1_POLICY_FILES_INSTALL_DIR has an absolute pathname, fix that.
     if(PolkitQt6-1_FOUND)
